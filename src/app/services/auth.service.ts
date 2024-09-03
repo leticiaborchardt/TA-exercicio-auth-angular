@@ -2,18 +2,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private url = "http://localhost:8080/auth";
-  private isAuthenticated: boolean = false;
 
   constructor(private httpClient: HttpClient) { }
 
-  login(login: Login): Observable<Login> {
-    return this.httpClient.post<Login>(`${this.url}/login`, login);
+  login(login: Login): Observable<User> {
+    return this.httpClient.post<User>(`${this.url}/login`, login);
   }
 
   logout(): Observable<any> {
@@ -21,11 +21,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated;
-  }
-
-  setIsAuthenticated(isAuthenticated: boolean): void {
-    this.isAuthenticated = isAuthenticated;
+    return this.getAuthToken() != null;
   }
 
   getAuthToken(): string | null {
@@ -36,7 +32,20 @@ export class AuthService {
     localStorage.setItem('authToken', token);
   }
 
-  removeAuthToken(): void {
+  setCurrentUser(user: User): void {
+    this.setUserRole(user.role);
+  }
+
+  getUserRole(): string {
+    return localStorage.getItem('userRole') || '';
+  }
+
+  setUserRole(role: string) {
+    localStorage.setItem('userRole', role);
+  }
+
+  removeUserData() {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('userRole');
   }
 }

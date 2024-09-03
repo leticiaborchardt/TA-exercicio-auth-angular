@@ -1,0 +1,51 @@
+<div class="max-w-4xl mx-auto p-6 mt-20 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">New Appointment</h2>
+    <form (ngSubmit)="onSubmit()" #appointmentForm="ngForm" novalidate>
+
+        <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-medium mb-2">Description</label>
+            <input id="description" name="description" type="text" [(ngModel)]="appointment.description"
+                #description="ngModel" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                class="text-red-500 text-sm mt-1">
+                Description is required.
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="dateTime" class="block text-gray-700 font-medium mb-2">Date Time</label>
+            <input id="dateTime" name="dateTime" type="datetime-local" [(ngModel)]="appointment.dateTime"
+                #dateTime="ngModel" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <div *ngIf="dateTime.invalid && (dateTime.dirty || dateTime.touched)" class="text-red-500 text-sm mt-1">
+                Date Time are required.
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="doctor" class="block text-gray-700 font-medium mb-2">Doctor</label>
+            <input id="doctor" name="doctor" type="text" [(ngModel)]="appointment.doctor" #doctor="ngModel" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <div *ngIf="doctor.invalid && (doctor.dirty || doctor.touched)" class="text-red-500 text-sm mt-1">
+                Doctor is required.
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="patient" class="block text-gray-700 font-medium mb-2">Patient</label>
+            <input id="patient" name="patient" type="text" [(ngModel)]="appointment.patient" #patient="ngModel" required
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <div *ngIf="patient.invalid && (patient.dirty || patient.touched)" class="text-red-500 text-sm mt-1">
+                Patient is required.
+            </div>
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit" [disabled]="appointmentForm.invalid"
+                class="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

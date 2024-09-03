@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="max-w-4xl mx-auto p-6 mt-20 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">Welcome to MedLink!</h2>
+    <p class="text-gray-700">
+        This application consumes an API and applies authentication and authorization 
+        logic by accessing the login, logout, get appointments, and post appointments endpoints.
+    </p>
+    <div class="mt-6">
+        <h3 class="text-xl font-semibold mb-2">The permission validation for appointments occurs as follows:</h3>
+        <ul class="list-disc pl-5 text-gray-700">
+            <li>POST -> roles: admin, doctor, and receptionist</li>
+            <li>GET -> roles: admin, doctor, and patient</li>
+        </ul>
+    </div>
+</div>

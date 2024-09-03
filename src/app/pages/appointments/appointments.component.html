@@ -1,1 +1,25 @@
-<p>appointments works!</p>
+<div class="max-w-4xl mx-auto p-6 mt-20 bg-white rounded-lg shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">Appointments List</h2>
+    
+    <table class="w-full border-collapse">
+      <thead>
+        <tr class="bg-gray-100 border-b">
+          <th class="px-4 py-2 text-left text-gray-600">Description</th>
+          <th class="px-4 py-2 text-left text-gray-600">Date and Time</th>
+          <th class="px-4 py-2 text-left text-gray-600">Doctor</th>
+          <th class="px-4 py-2 text-left text-gray-600">Patient</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments" class="border-b">
+          <td class="px-4 py-2">{{ appointment.description }}</td>
+          <td class="px-4 py-2">{{ appointment.dateTime | date:'short' }}</td>
+          <td class="px-4 py-2">{{ appointment.doctor }}</td>
+          <td class="px-4 py-2">{{ appointment.patient }}</td>
+        </tr>
+        <tr *ngIf="appointments.length === 0">
+          <td colspan="4" class="px-4 py-2 text-center text-gray-500">No appointments found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

@@ -15,8 +15,7 @@ export class NavbarComponent {
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {
-        this.authService.setIsAuthenticated(false);
-        this.authService.removeAuthToken();
+        this.authService.removeUserData();
 
         this.router.navigateByUrl('/login');
       },
