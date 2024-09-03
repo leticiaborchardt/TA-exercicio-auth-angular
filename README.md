@@ -1,4 +1,13 @@
-# ExercicioAuth
+# Exercise: Basic Authentication and Authorization Configuration - Angular
+
+This Angular application consumes an [API](https://github.com/leticiaborchardt/TA-exercicio-auth) and applies authentication and authorization logic by accessing the login, logout, get appointments, and post appointments endpoints.
+
+The permission validation for appointments occurs as follows:
+
+- POST -> roles: admin, doctor, and receptionist
+- GET -> roles: admin, doctor, and patient
+
+##
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
 
