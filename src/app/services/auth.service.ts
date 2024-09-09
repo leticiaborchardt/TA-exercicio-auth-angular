@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Login } from '../models/login.model';
 import { User } from '../models/user.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class AuthService {
     return this.getAuthToken() != null;
   }
 
+  getUserRole(): string {
+    return jwtDecode(this.getAuthToken() ?? '').sub ?? '';
+  }
+
   getAuthToken(): string | null {
     return localStorage.getItem('authToken');
   }
@@ -32,20 +37,7 @@ export class AuthService {
     localStorage.setItem('authToken', token);
   }
 
-  setCurrentUser(user: User): void {
-    this.setUserRole(user.role);
-  }
-
-  getUserRole(): string {
-    return localStorage.getItem('userRole') || '';
-  }
-
-  setUserRole(role: string) {
-    localStorage.setItem('userRole', role);
-  }
-
-  removeUserData() {
+  removeAuthToken() {
     localStorage.removeItem('authToken');
-    localStorage.removeItem('userRole');
   }
 }

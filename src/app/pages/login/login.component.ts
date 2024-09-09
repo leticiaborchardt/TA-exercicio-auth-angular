@@ -3,7 +3,7 @@ import { Login } from '../../models/login.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../models/user.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     password: ""
   };
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
@@ -30,10 +30,8 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.authService.login(this.login).subscribe({
       next: (user: User) => {
-        this.authService.setCurrentUser(user);
         this.authService.setAuthToken(user.token);
-
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl(this.route.snapshot.queryParamMap.get('stateUrl') || '');
       },
       error: (error) => alert('Invalid credentials.')
     })

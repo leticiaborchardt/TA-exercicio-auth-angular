@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Appointment, NewAppointment } from '../models/appointment.model';
+import { Appointment } from '../models/appointment.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class AppointmentService {
     return this.httpClient.get<Appointment[]>(this.url);
   }
 
-  addAppointment(appointment: NewAppointment): Observable<Appointment> {
+  addAppointment(appointment: Appointment): Observable<Appointment> {
     return this.httpClient.post<Appointment>(this.url, appointment);
   }
 }
